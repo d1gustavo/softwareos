@@ -8,7 +8,8 @@ app = Flask(__name__)
 app.secret_key = 'segredo123'
 
 # Configuração do PostgreSQL (Railway)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:lueCWdejYTzxAdazTWdxILNSZwMMlHhV@postgres.railway.internal:5432/railway'
+db_url = f"postgresql://{os.getenv('PGUSER')}:{os.getenv('PGPASSWORD')}@{os.getenv('PGHOST')}:{os.getenv('PGPORT')}/{os.getenv('PGDATABASE')}"
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
